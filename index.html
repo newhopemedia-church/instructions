@@ -12,6 +12,7 @@
   --brand:#08473a;--brand-dark:#053028;--brand-mid:#0d6b56;
   --brand-light:#e8f3f0;--brand-pale:#f2f8f6;--accent:#2ab38a;
   --text-on-brand:#d4efe7;
+  --warn-bg:#fffbeb;--warn-border:#d97706;--warn-text:#7c3a00;
   --radius:12px;--radius-sm:8px;
 }
 body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5;color:#111;min-height:100vh;padding-bottom:3rem}
@@ -26,7 +27,6 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5;color:#111;min
 
 .main{padding:1rem}
 
-/* Головне меню — вертикальний список */
 .menu-view{display:block}
 .section-view{display:none}
 .section-view.active{display:block}
@@ -42,13 +42,11 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5;color:#111;min
 .menu-sub{font-size:12px;color:#777;margin-top:2px}
 .menu-arrow{font-size:20px;color:#bbb;flex-shrink:0}
 
-/* Кнопка назад */
 .back-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;border:1.5px solid #e0e0e0;background:#fff;color:var(--brand-mid);font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:.9rem;transition:all .15s}
 .back-btn:hover{background:var(--brand-pale);border-color:var(--brand)}
 .back-btn i{font-size:16px}
 
 .section-title{font-size:17px;font-weight:700;color:#111;margin-bottom:.9rem;padding-left:.1rem}
-
 .section-group-label{font-size:11px;font-weight:700;color:var(--brand-mid);letter-spacing:.08em;text-transform:uppercase;padding:.25rem 0 .5rem}
 
 .card{background:#fff;border:1.5px solid #e0e0e0;border-radius:var(--radius);margin-bottom:.75rem;overflow:hidden}
@@ -70,6 +68,20 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5;color:#111;min
 .empty-state i{font-size:2.2rem;color:var(--brand-light);display:block;margin-bottom:.6rem}
 .empty-state strong{color:var(--brand-mid);display:block;font-size:13px;margin-bottom:.25rem}
 .empty-state p{font-size:12px;line-height:1.6}
+
+.step{display:flex;gap:11px;align-items:flex-start;margin-bottom:1.1rem}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-text{font-size:14px;line-height:1.6;color:#111;flex:1}
+.step-text b{color:var(--brand-dark)}
+
+.photo-wrap{margin:.25rem 0 1.25rem}
+.photo-label{font-size:11px;font-weight:700;color:var(--brand-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.photo-img{width:100%;border-radius:var(--radius-sm);border:1.5px solid #e0e0e0;display:block}
+.photo-caption{font-size:12px;color:#777;margin-top:.4rem;line-height:1.5;padding:0 .1rem}
+
+.alert{display:flex;gap:10px;padding:11px 13px;border-radius:var(--radius-sm);margin:.6rem 0 1rem;font-size:13.5px;line-height:1.6;border-left:3px solid}
+.alert i{font-size:17px;flex-shrink:0;margin-top:1px}
+.alert.warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
 
 .footer{text-align:center;padding:1rem;font-size:11px;color:#999;margin-top:.5rem}
 </style>
@@ -180,10 +192,43 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5;color:#111;min
   <div class="section-view" id="sv-display">
     <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
     <div class="section-title">Проблеми з відображенням</div>
-    <div class="empty-state" style="padding:2.5rem 1rem">
-      <i class="ti ti-device-tv" aria-hidden="true"></i>
-      <strong>Розділ порожній</strong>
-      <p>Вміст буде додано пізніше</p>
+
+    <div class="card">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <div class="acc-icon"><i class="ti ti-device-desktop" aria-hidden="true"></i></div>
+        <div class="acc-titles">
+          <div class="acc-title">Налаштування екранів у ProPresenter</div>
+          <div class="acc-sub">Основний дисплей вимкнений — як виправити</div>
+        </div>
+        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+      </button>
+      <div class="acc-body">
+        <div class="alert warn">
+          <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+          <span>Якщо зверху справа написано <b>"Основний Дисплей Виключен"</b> — слайди не виводяться на екран. Виправляємо за кроками нижче.</span>
+        </div>
+
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-text">Натисни на іконку акаунту <b>зверху справа</b> → у меню обери <b>"Настройки"</b></div>
+        </div>
+        <div class="photo-wrap">
+          <div class="photo-label">Крок 1</div>
+          <img class="photo-img" src="Photo_01.png" alt="Налаштування у ProPresenter">
+          <div class="photo-caption">Налаштування у ProPresenter</div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-text">У налаштуваннях знайди розділ <b>"Розширені Налаштування"</b> → натисни <b>"Конфігурація Екрана"</b></div>
+        </div>
+        <div class="photo-wrap">
+          <div class="photo-label">Крок 2</div>
+          <img class="photo-img" src="Photo_02.png" alt="Конфігурація екрана">
+          <div class="photo-caption">Конфігурація екрана</div>
+        </div>
+
+      </div>
     </div>
   </div>
 
