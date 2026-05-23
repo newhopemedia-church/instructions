@@ -7,23 +7,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-html{background:#f5f5f5 !important}
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --brand:#08473a;--brand-dark:#053028;--brand-mid:#0d6b56;
   --brand-light:#e8f3f0;--brand-pale:#f2f8f6;--accent:#2ab38a;
   --text-on-brand:#d4efe7;
-  --warn-bg:#fffbeb;--warn-border:#d97706;--warn-text:#7c3a00;
   --radius:12px;--radius-sm:8px;
 }
-body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5 !important;color:#111 !important;min-height:100vh;padding-bottom:3rem}
+html{background:#f5f5f5}
+body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5;color:#111;min-height:100vh;padding-bottom:3rem}
 .header{background:var(--brand);padding:2rem 1.25rem 1.5rem;text-align:center}
 .header-badge{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:var(--text-on-brand);font-size:10px;letter-spacing:.14em;padding:4px 14px;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;font-weight:600}
 .header h1{color:#fff;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:700;line-height:1.25;margin-bottom:.4rem}
 .header h1 span{color:var(--accent)}
 .header p{color:rgba(255,255,255,.5);font-size:.83rem;max-width:340px;margin:0 auto}
-.live-dot{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:11px;padding:4px 10px;border-radius:12px;margin-top:.9rem}
-.dot{width:7px;height:7px;border-radius:50%;background:#34d399}
 .main{padding:1rem}
 .menu-view{display:block}
 .section-view{display:none}
@@ -40,7 +37,7 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5 !important;col
 .back-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;border:1.5px solid #e0e0e0;background:#fff;color:var(--brand-mid);font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:.9rem;transition:all .15s}
 .back-btn:hover{background:var(--brand-pale);border-color:var(--brand)}
 .back-btn i{font-size:16px}
-.section-title{font-size:17px;font-weight:700;color:#111;margin-bottom:.9rem;padding-left:.1rem}
+.section-title{font-size:17px;font-weight:700;color:#111;margin-bottom:.9rem}
 .section-group-label{font-size:11px;font-weight:700;color:var(--brand-mid);letter-spacing:.08em;text-transform:uppercase;padding:.25rem 0 .5rem}
 .card{background:#fff;border:1.5px solid #e0e0e0;border-radius:var(--radius);margin-bottom:.75rem;overflow:hidden}
 .acc-head{width:100%;display:flex;align-items:center;gap:12px;padding:1rem 1.1rem;cursor:pointer;background:none;border:none;text-align:left;border-bottom:1px solid transparent;transition:background .15s}
@@ -66,7 +63,11 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5 !important;col
 .photo-wrap{margin:.25rem 0 1.25rem}
 .photo-label{font-size:11px;font-weight:700;color:var(--brand-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
 .photo-img{width:100%;border-radius:var(--radius-sm);border:1.5px solid #e0e0e0;display:block}
-.photo-caption{font-size:12px;color:#777;margin-top:.4rem;line-height:1.5;padding:0 .1rem}
+.photo-caption{font-size:12px;color:#777;margin-top:.4rem;line-height:1.5}
+.photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.25rem 0 1.25rem}
+.photo-pair-item{}
+.badge-wrong{display:inline-block;background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:11px;font-weight:700;padding:2px 8px;margin-bottom:.3rem}
+.badge-right{display:inline-block;background:#f0fdf4;color:#16a34a;border:1px solid #86efac;border-radius:6px;font-size:11px;font-weight:700;padding:2px 8px;margin-bottom:.3rem}
 .footer{text-align:center;padding:1rem;font-size:11px;color:#999;margin-top:.5rem}
 </style>
 </head>
@@ -84,191 +85,222 @@ body{font-family:'Nunito',system-ui,sans-serif;background:#f5f5f5 !important;col
   <div class="menu-view" id="menuView">
     <div class="menu-label">Розділи</div>
     <button class="menu-item" onclick="openSection('checklist')">
-      <div class="menu-icon"><i class="ti ti-checklist" aria-hidden="true"></i></div>
+      <div class="menu-icon"><i class="ti ti-checklist"></i></div>
       <div class="menu-texts"><div class="menu-title">Чек-лист</div><div class="menu-sub">Перед і після зібрання</div></div>
-      <i class="ti ti-chevron-right menu-arrow" aria-hidden="true"></i>
+      <i class="ti ti-chevron-right menu-arrow"></i>
     </button>
     <button class="menu-item" onclick="openSection('display')">
-      <div class="menu-icon"><i class="ti ti-device-tv" aria-hidden="true"></i></div>
+      <div class="menu-icon"><i class="ti ti-device-tv"></i></div>
       <div class="menu-texts"><div class="menu-title">Проблеми з відображенням</div><div class="menu-sub">Немає картинки, спотворення, мерехтіння</div></div>
-      <i class="ti ti-chevron-right menu-arrow" aria-hidden="true"></i>
+      <i class="ti ti-chevron-right menu-arrow"></i>
     </button>
     <button class="menu-item" onclick="openSection('tv')">
-      <div class="menu-icon"><i class="ti ti-device-desktop-off" aria-hidden="true"></i></div>
+      <div class="menu-icon"><i class="ti ti-device-desktop-off"></i></div>
       <div class="menu-texts"><div class="menu-title">Сірий екран ТВ</div><div class="menu-sub">Збій в роботі телевізорів</div></div>
-      <i class="ti ti-chevron-right menu-arrow" aria-hidden="true"></i>
+      <i class="ti ti-chevron-right menu-arrow"></i>
     </button>
     <button class="menu-item" onclick="openSection('presentation')">
-      <div class="menu-icon"><i class="ti ti-presentation" aria-hidden="true"></i></div>
+      <div class="menu-icon"><i class="ti ti-presentation"></i></div>
       <div class="menu-texts"><div class="menu-title">Проблеми з презентацією</div><div class="menu-sub">Файл, шрифти, зависання</div></div>
-      <i class="ti ti-chevron-right menu-arrow" aria-hidden="true"></i>
+      <i class="ti ti-chevron-right menu-arrow"></i>
     </button>
   </div>
 
   <!-- ЧЕК-ЛИСТ -->
   <div class="section-view" id="sv-checklist">
-    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
+    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i>Назад</button>
     <div class="section-title">Чек-лист</div>
     <div class="section-group-label">Команда презентацій</div>
     <div class="card">
       <button class="acc-head" onclick="toggleAcc(this)">
-        <div class="acc-icon"><i class="ti ti-sun" aria-hidden="true"></i></div>
+        <div class="acc-icon"><i class="ti ti-sun"></i></div>
         <div class="acc-titles"><div class="acc-title">Перед зібранням</div><div class="acc-sub">Команда презентацій</div></div>
-        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+        <i class="ti ti-chevron-down acc-arrow"></i>
       </button>
       <div class="acc-body">
-        <div class="empty-state"><i class="ti ti-clipboard-list" aria-hidden="true"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
+        <div class="empty-state"><i class="ti ti-clipboard-list"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
       </div>
     </div>
     <div class="card">
       <button class="acc-head" onclick="toggleAcc(this)">
-        <div class="acc-icon"><i class="ti ti-moon" aria-hidden="true"></i></div>
+        <div class="acc-icon"><i class="ti ti-moon"></i></div>
         <div class="acc-titles"><div class="acc-title">Після зібрання</div><div class="acc-sub">Команда презентацій</div></div>
-        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+        <i class="ti ti-chevron-down acc-arrow"></i>
       </button>
       <div class="acc-body">
-        <div class="empty-state"><i class="ti ti-clipboard-check" aria-hidden="true"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
+        <div class="empty-state"><i class="ti ti-clipboard-check"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
       </div>
     </div>
     <div class="section-group-label">Команда трансляції</div>
     <div class="card">
       <button class="acc-head" onclick="toggleAcc(this)">
-        <div class="acc-icon"><i class="ti ti-sun" aria-hidden="true"></i></div>
+        <div class="acc-icon"><i class="ti ti-sun"></i></div>
         <div class="acc-titles"><div class="acc-title">Перед зібранням</div><div class="acc-sub">Команда трансляції</div></div>
-        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+        <i class="ti ti-chevron-down acc-arrow"></i>
       </button>
       <div class="acc-body">
-        <div class="empty-state"><i class="ti ti-clipboard-list" aria-hidden="true"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
+        <div class="empty-state"><i class="ti ti-clipboard-list"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
       </div>
     </div>
     <div class="card">
       <button class="acc-head" onclick="toggleAcc(this)">
-        <div class="acc-icon"><i class="ti ti-moon" aria-hidden="true"></i></div>
+        <div class="acc-icon"><i class="ti ti-moon"></i></div>
         <div class="acc-titles"><div class="acc-title">Після зібрання</div><div class="acc-sub">Команда трансляції</div></div>
-        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+        <i class="ti ti-chevron-down acc-arrow"></i>
       </button>
       <div class="acc-body">
-        <div class="empty-state"><i class="ti ti-clipboard-check" aria-hidden="true"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
+        <div class="empty-state"><i class="ti ti-clipboard-check"></i><strong>Буде додано пізніше</strong><p>Вміст з'явиться тут після наповнення</p></div>
       </div>
     </div>
   </div>
 
   <!-- ПРОБЛЕМИ З ВІДОБРАЖЕННЯМ -->
   <div class="section-view" id="sv-display">
-    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
+    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i>Назад</button>
     <div class="section-title">Проблеми з відображенням</div>
     <div class="card">
       <button class="acc-head" onclick="toggleAcc(this)">
-        <div class="acc-icon"><i class="ti ti-device-desktop" aria-hidden="true"></i></div>
+        <div class="acc-icon"><i class="ti ti-device-desktop"></i></div>
         <div class="acc-titles">
           <div class="acc-title">Налаштування екранів у ProPresenter</div>
           <div class="acc-sub">Основний дисплей вимкнений — як виправити</div>
         </div>
-        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+        <i class="ti ti-chevron-down acc-arrow"></i>
       </button>
       <div class="acc-body">
+
         <div class="step">
           <span class="step-num">1</span>
-          <div class="step-text">Натисни на іконку шестерні ⚙️ <b>зверху справа</b> → у меню обери <b>"Настройки"</b></div>
+          <div class="step-text">Натисни на іконку шестерні ⚙️ <b>зверху справа</b> → у меню обери <b>"Налаштування"</b></div>
         </div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 1</div>
-          <img class="photo-img" src="Photo_01.png" alt="Налаштування у ProPresenter">
-          <div class="photo-caption">Налаштування у ProPresenter</div>
+          <img class="photo-img" src="photo_01.png" alt="Відкрити меню Presenter">
+          <div class="photo-caption">Відкрити меню Presenter</div>
         </div>
+
         <div class="step">
           <span class="step-num">2</span>
-          <div class="step-text">У налаштуваннях знайди розділ <b>"Розширені Налаштування"</b> → натисни <b>"Конфігурація Екрана"</b></div>
+          <div class="step-text">З меню що відкрилось обери <b>"Налаштування"</b></div>
         </div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 2</div>
-          <img class="photo-img" src="Photo_02.png" alt="Конфігурація екрана">
+          <img class="photo-img" src="photo_02.png" alt="Обрати Налаштування">
+          <div class="photo-caption">Обрати Налаштування</div>
+        </div>
+
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-text">У розділі <b>"Розширений"</b> натисни <b>"Конфігурація екрана"</b></div>
+        </div>
+        <div class="photo-wrap">
+          <div class="photo-label">Крок 3</div>
+          <img class="photo-img" src="photo_03.png" alt="Конфігурація екрана">
           <div class="photo-caption">Конфігурація екрана</div>
         </div>
+
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-text">Перевір налаштування дисплеїв — нижче показано <b>неправильне</b> і <b>правильне</b> налаштування</div>
+        </div>
+
+        <div class="photo-label">Крок 4 — ❌ Неправильно</div>
+        <div class="photo-pair" style="margin-bottom:.3rem">
+          <div class="photo-pair-item">
+            <div class="badge-wrong">❌ Main Audience Output</div>
+            <img class="photo-img" src="photo_04.png" alt="Неправильно — Main Audience Output">
+            <div class="photo-caption">Дисплей 1 призначено для Main Audience Output — це неправильно</div>
+          </div>
+          <div class="photo-pair-item">
+            <div class="badge-wrong">❌ Stream</div>
+            <img class="photo-img" src="photo_05.png" alt="Неправильно — Stream">
+            <div class="photo-caption">Дисплей 2 призначено для Stream — це неправильно</div>
+          </div>
+        </div>
+
+        <div class="photo-label" style="margin-top:1rem">Крок 5 — ✅ Правильно</div>
+        <div class="photo-pair" style="margin-bottom:.3rem">
+          <div class="photo-pair-item">
+            <div class="badge-right">✅ Main Audience Output</div>
+            <img class="photo-img" src="photo_06.png" alt="Правильно — Main Audience Output">
+            <div class="photo-caption">Дисплей 2 для Main Audience Output — правильно</div>
+          </div>
+          <div class="photo-pair-item">
+            <div class="badge-right">✅ Stream</div>
+            <img class="photo-img" src="photo_07.png" alt="Правильно — Stream">
+            <div class="photo-caption">Дисплей 1 для Stream — правильно</div>
+          </div>
+        </div>
+
+        <div class="step" style="margin-top:1rem">
+          <span class="step-num">6</span>
+          <div class="step-text">Обери <b>"Stage Display"</b> і переконайся що встановлено <b>"Вимкнено"</b> → натисни <b>"Зберегти"</b></div>
+        </div>
+        <div class="photo-wrap">
+          <div class="photo-label">Крок 6</div>
+          <img class="photo-img" src="photo_08.png" alt="Stage Display — Вимкнено">
+          <div class="photo-caption">Stage Display має бути Вимкнено</div>
+        </div>
+
       </div>
     </div>
   </div>
 
   <!-- СІРИЙ ЕКРАН ТВ -->
   <div class="section-view" id="sv-tv">
-    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
+    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i>Назад</button>
     <div class="section-title">Сірий екран ТВ</div>
-
     <div class="card">
       <button class="acc-head" onclick="toggleAcc(this)">
-        <div class="acc-icon"><i class="ti ti-plug" aria-hidden="true"></i></div>
+        <div class="acc-icon"><i class="ti ti-plug"></i></div>
         <div class="acc-titles">
           <div class="acc-title">Перезавантажити живлення сплітера</div>
           <div class="acc-sub">Якщо телевізори показують сірий екран</div>
         </div>
-        <i class="ti ti-chevron-down acc-arrow" aria-hidden="true"></i>
+        <i class="ti ti-chevron-down acc-arrow"></i>
       </button>
       <div class="acc-body">
-
-        <p style="font-size:14px;line-height:1.7;color:#111;margin-bottom:1.1rem">
-          Якщо телевізори показують сірий екран - перезавантаж сплітер за сценою. Потрібно зайти за сцену, знайти сплітер на стінці, вийняти роз'єм живлення і вставити назад.
-        </p>
-
-        <div class="step">
-          <span class="step-num">1</span>
-          <div class="step-text">Зайди <b>за сцену</b> через прохід збоку</div>
-        </div>
+        <p style="font-size:14px;line-height:1.7;color:#111;margin-bottom:1.1rem">Якщо телевізори показують сірий екран - перезавантаж сплітер за сценою. Потрібно зайти за сцену, знайти сплітер на стінці, вийняти роз'єм живлення і вставити назад.</p>
+        <div class="step"><span class="step-num">1</span><div class="step-text">Зайди <b>за сцену</b> через прохід збоку</div></div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 1</div>
           <img class="photo-img" src="01.jpg" alt="Апаратура за сценою">
           <div class="photo-caption">Апаратура за сценою</div>
         </div>
-
-        <div class="step">
-          <span class="step-num">2</span>
-          <div class="step-text">Знайди <b>сплітер на стінці</b> — чорна коробка з кабелями</div>
-        </div>
+        <div class="step"><span class="step-num">2</span><div class="step-text">Знайди <b>сплітер на стінці</b> — чорна коробка з кабелями</div></div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 2</div>
           <img class="photo-img" src="02.jpg" alt="Сплітер на стінці">
           <div class="photo-caption">Сплітер на стінці</div>
         </div>
-
-        <div class="step">
-          <span class="step-num">3</span>
-          <div class="step-text">Знайди <b>роз'єм живлення</b> — невеликий круглий штекер збоку</div>
-        </div>
+        <div class="step"><span class="step-num">3</span><div class="step-text">Знайди <b>роз'єм живлення</b> — невеликий круглий штекер збоку</div></div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 3</div>
           <img class="photo-img" src="03.jpg" alt="Роз'єм живлення">
           <div class="photo-caption">Роз'єм живлення</div>
         </div>
-
-        <div class="step">
-          <span class="step-num">4</span>
-          <div class="step-text"><b>Вийми роз'єм</b> живлення з гнізда</div>
-        </div>
+        <div class="step"><span class="step-num">4</span><div class="step-text"><b>Вийми роз'єм</b> живлення з гнізда</div></div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 4</div>
           <img class="photo-img" src="04.jpg" alt="Вийняти роз'єм">
           <div class="photo-caption">Вийняти роз'єм</div>
         </div>
-
-        <div class="step">
-          <span class="step-num">5</span>
-          <div class="step-text">Зачекай <b>5 секунд</b> і <b>під'єднай роз'єм</b> назад</div>
-        </div>
+        <div class="step"><span class="step-num">5</span><div class="step-text">Зачекай <b>5 секунд</b> і <b>під'єднай роз'єм</b> назад</div></div>
         <div class="photo-wrap">
           <div class="photo-label">Крок 5</div>
           <img class="photo-img" src="05.jpg" alt="Під'єднати роз'єм">
           <div class="photo-caption">Під'єднати роз'єм</div>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- ПРОБЛЕМИ З ПРЕЗЕНТАЦІЄЮ -->
   <div class="section-view" id="sv-presentation">
-    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
+    <button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i>Назад</button>
     <div class="section-title">Проблеми з презентацією</div>
     <div class="empty-state" style="padding:2.5rem 1rem">
-      <i class="ti ti-presentation" aria-hidden="true"></i>
+      <i class="ti ti-presentation"></i>
       <strong>Розділ порожній</strong>
       <p>Вміст буде додано пізніше</p>
     </div>
